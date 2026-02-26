@@ -1,4 +1,3 @@
-import { Store } from "@tauri-apps/plugin-store";
 import { create } from "zustand";
 import {
   AppSettings,
@@ -10,8 +9,16 @@ import {
   WritingEntry,
 } from "../types";
 
-const store = new Store("writing-tracker.json");
+import { load } from "@tauri-apps/plugin-store";
 
+let storeInstance: Awaited<ReturnType<typeof load>> | null = null;
+
+async function getStore() {
+  if (!storeInstance) {
+    storeInstance = await load("writing-tracker.json", { defaults: {} });
+  }
+  return storeInstance;
+}
 const DEFAULT_SETTINGS: AppSettings = {
   unitType: "characters",
   thresholds: {
@@ -68,10 +75,10 @@ export const useStore = create<StoreState>((set, get) => ({
 
   loadStore: async () => {
   try {
-    const settings = await store.get<AppSettings>("settings");
-    const writingData = await store.get<Record<string, DayData>>("writingData");
-    const todos = await store.get<TodoItem[]>("todos");
-    const categories = await store.get<Category[]>("categories");
+    const settings = await (await getStore()).get<AppSettings>("settings");
+    const writingData = await (await getStore()).get<Record<string, DayData>>("writingData");
+    const todos = await (await getStore()).get<TodoItem[]>("todos");
+    const categories = await (await getStore()).get<Category[]>("categories");
 
     set({
       settings: settings ?? DEFAULT_SETTINGS,
@@ -94,11 +101,10 @@ export const useStore = create<StoreState>((set, get) => ({
 
   saveStore: async () => {
     const { settings, writingData, todos, categories } = get();
-    await store.set("settings", settings);
-    await store.set("writingData", writingData);
-    await store.set("todos", todos);
-    await store.set("categories", categories);
-    await store.save();
+    await (await getStore()).set("settings", settings);
+    await (await getStore()).set("writingData", writingData);
+    await (await getStore()).set("todos", todos);
+    await (await getStore()).set("categories", categories);
   },
 
   updateUnitType: (unitType) => {

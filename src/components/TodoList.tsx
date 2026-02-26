@@ -12,9 +12,9 @@ function DatePicker({ value, onChange }: { value: string; onChange: (date: strin
 
   const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
   const firstDay = new Date(viewYear, viewMonth, 1).getDay();
-  const cells = Array.from({ length: firstDay }, () => null).concat(
-    Array.from({ length: daysInMonth }, (_, i) => i + 1)
-  );
+  const cells = (Array.from({ length: firstDay }, () => null) as (null | number)[]).concat(
+  Array.from({ length: daysInMonth }, (_, i) => i + 1)
+);
 
   const handleSelect = (day: number) => {
     const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
@@ -204,9 +204,9 @@ export default function TodoList() {
   // 캘린더 뷰
   const firstDayOfMonth = new Date(calYear, calMonth, 1).getDay();
   const daysInMonth = MONTH_DAYS(calYear, calMonth);
-  const calCells = Array.from({ length: firstDayOfMonth }, () => null).concat(
-    Array.from({ length: daysInMonth }, (_, i) => i + 1)
-  );
+  const calCells = (Array.from({ length: firstDayOfMonth }, () => null) as (null | number)[]).concat(
+  Array.from({ length: daysInMonth }, (_, i) => i + 1)
+);
 
   const todosForDay = (day: number) => {
     const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;

@@ -90,10 +90,10 @@ export default function Settings({ onClose }: Props) {
           <h3 className="text-sm font-semibold text-gray-600 mb-2">잔디 색상 기준</h3>
           <div className="space-y-2">
             {[
-              { key: "level1", label: "2단계 (연한 보라)", color: "bg-purple-200" },
-              { key: "level2", label: "3단계 (중간 보라)", color: "bg-purple-400" },
-              { key: "level3", label: "4단계 (중간진한 보라)", color: "bg-purple-600" },
-              { key: "level4", label: "5단계 (가장 진한 보라)", color: "bg-purple-800" },
+              { key: "level1", label: "2단계", color: "bg-purple-200" },
+              { key: "level2", label: "3단계", color: "bg-purple-400" },
+              { key: "level3", label: "4단계", color: "bg-purple-600" },
+              { key: "level4", label: "5단계", color: "bg-purple-800" },
             ].map(({ key, label, color }) => (
               <div key={key} className="flex items-center gap-3">
                 <div className={`w-4 h-4 rounded-sm ${color} flex-shrink-0`} />

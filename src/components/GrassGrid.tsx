@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useStore } from "../store/useStore";
-import { format, startOfWeek, eachDayOfInterval, subMonths, addDays, isSameDay } from "date-fns";
+import { format, startOfWeek, eachDayOfInterval, subMonths, isSameDay } from "date-fns";
 
 const LEVEL_COLORS = [
-  "bg-gray-200",
-  "bg-purple-200",
-  "bg-purple-400",
-  "bg-purple-600",
-  "bg-purple-800",
+  "bg-gray-200",    // 0단계 - 0자
+  "bg-purple-200",  // 1단계 - 1자 이상
+  "bg-purple-400",  // 2단계 - level1 이상
+  "bg-purple-600",  // 3단계 - level2 이상
+  "bg-purple-800",  // 4단계 - level3 이상
+  "bg-purple-900",  // 5단계 - level4 이상
 ];
 
 function getLevel(total: number, thresholds: { level1: number; level2: number; level3: number; level4: number }) {
@@ -129,14 +130,9 @@ export default function GrassGrid() {
                     <div
                       key={dateStr}
                       className={`w-4 h-4 mb-0.5 rounded-sm cursor-pointer transition-opacity hover:opacity-80
-                        ${level === 0 ? LEVEL_COLORS[0] : ""}
-                        ${level === 1 ? LEVEL_COLORS[1] : ""}
-                        ${level === 2 ? LEVEL_COLORS[2] : ""}
-                        ${level === 3 ? LEVEL_COLORS[3] : ""}
-                        ${level === 4 ? LEVEL_COLORS[4] : ""}
-                        ${level === 5 ? "bg-purple-900" : ""}
+                        ${LEVEL_COLORS[level]}
                         ${isToday ? "ring-1 ring-purple-500 ring-offset-1" : ""}
-                      `}
+                        `}
                       onMouseEnter={(e) => handleMouseEnter(e, day)}
                       onMouseLeave={() => setTooltip(null)}
                     />

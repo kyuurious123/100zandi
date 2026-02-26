@@ -29,7 +29,7 @@ export default function App() {
     <div className="min-h-screen bg-gray-50">
       {/* 상단 헤더 */}
       <div className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-between">
-        <h1 className="text-base font-bold text-purple-700">✍️ Writing Tracker</h1>
+        <h1 className="text-base font-bold text-purple-700">잔디 심기</h1>
         <div className="flex gap-2">
           <button
             onClick={() => {

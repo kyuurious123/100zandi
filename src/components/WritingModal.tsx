@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useStore } from "../store/useStore";
-import { format } from "date-fns";
 import { X, Plus, Trash2, Pencil, Check } from "lucide-react";
 
 interface Props {
